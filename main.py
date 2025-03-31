@@ -57,16 +57,42 @@ def main():
             if validateSuccess == True:
                 logger.info(f"Navigated to Live Timing")
             else:
-                logger.error(f"Unable to navigate to live timing.")
-
+                logger.error(f"Unable to navigate to Live Timing.")
+                continue
+            
         except Exception as e:
             logger.error(f"Unable to click the event | {e}")
+            continue
             
-            
-            
+        
+        #Determines the timezone of the current event    
         try:
-            validateSuccess = WebInteractions.DetermineActiveSession(configDictionary, webDriver, logger)
+            eventTimeZone = validateSuccess = WebInteractions.DetermineSelectedEventTZ(configDictionary, webDriver, logger)
+            if eventTimeZone == False:
+                logger.error("Unable to determine event timezone")
+                continue
+            else:
+                logger.info(f"Time zone located as {eventTimeZone}")
+            
         except Exception as e:
             logger.error(f"Unable to determine the applicable session by time. {e}")
+            continue
+
+        #Clicks session if session time has started with the last hour
+        try:
+            validateSuccess = WebInteractions.ClickSessionIfActive(configDictionary, webDriver, logger, eventTimeZone)
+            if validateSuccess == False:
+                logger.error("Unable to find an active session")
+                continue
+            else:
+                logger.info(f"Active session found")
+            
+        except Exception as e:
+            logger.error(f"Unable to determine the applicable session by time. {e}")
+            continue
+
+
+
+
 if __name__ == "__main__":
     main()

@@ -54,6 +54,4 @@ def LogToFile(configDictionary):
         logger = logging.getLogger("StandardLogger")
         return logger
     except Exception as e:
-        input("please hit the enter key to acknowledge...")
-        print(e)
         return Exception

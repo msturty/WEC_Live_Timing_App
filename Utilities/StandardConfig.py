@@ -1,6 +1,8 @@
 import os
 import xml.etree.ElementTree as ET
 import datetime
+import subprocess
+import json
 
 def CreateDictionary():
     """Loads an XML file and converts it into a dictionary."""
@@ -25,6 +27,10 @@ def CreateDictionary():
         configDictionary['currentYear'] = currentYear
         configDictionary['currentMonth'] = currentMonth
         
+        # Get values from the locker
+        configDictionary = GetSecretKeys(configDictionary)
+        
+        
         return configDictionary
 
     except FileNotFoundError as e:
@@ -35,3 +41,11 @@ def CreateDictionary():
         print(f"Unexpected error: {e}")
 
     return None  # Return None if an error occurs
+
+def GetSecretKeys(configDictionary):
+    
+    # Doppler loads secrets into environment variables
+    configDictionary["emailFrom"] = os.getenv("EMAIL_FROM")
+    configDictionary["emailTo"] = os.getenv("EMAIL_TO")
+    configDictionary["gmailPassword"] = os.getenv("GMAIL_PASSWORD")
+    return configDictionary

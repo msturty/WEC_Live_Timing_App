@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from Utilities import TimeConversion
+import time
 
 
 """
@@ -39,7 +40,7 @@ def CloseWebPage(configDictionary, webDriver, logger):
         
         # Wait for 5 seconds to see the browser
         time.sleep(int(configDictionary["longDelay"]))
-        webDriver["webDriver"].quit()
+        webDriver.quit()
         return True
 
     except Exception as e:
@@ -55,7 +56,7 @@ def ClickEvent(configDictionary, webDriver, logger):
     try:
         for i in range(int(configDictionary["numberOfEvents"])):
             aTagElement = i + 1
-            element = webDriver["webDriver"].find_element(By.XPATH, f"/html/body/div/div/div/div[2]/div/div[2]/div/a[{aTagElement}]/div[2]/div[2]/div")
+            element = webDriver.find_element(By.XPATH, f"/html/body/div/div/div/div[2]/div/div[2]/div/a[{aTagElement}]/div[2]/div[2]/div")
             innerHTML = element.get_attribute("innerHTML")
             if configDictionary["currentMonth"] in innerHTML:
                 element.click()
@@ -72,35 +73,60 @@ Clicks the event on WEC Live Timing page based on the time of the session start 
 """          
 def DetermineSelectedEventTZ(configDictionary, webDriver, logger):
     try:
-        while 1 == 1:
-            i += i
-            element = webDriver["webDriver"].find_element(By.XPATH, f"/html/body/div/div/div/div[1]/div[1]/div[1]/div[1]/span")
-            innerHTML = element.get_attribute("innerHTML")
-            formattedEventName = TimeConversion.DetermineCurrentEventSelected(configDictionary, innerHTML, logger)
-            if formattedEventName == False:
-                raise RuntimeError("Event not not found. Unable to format.")
-            timeDifference = TimeConversion.DetermineCurrentEventSelected(configDictionary, formattedEventName, logger)
-            if timeDifference == False:
-                raise RuntimeError("Time difference not calculated.")
-            
+        element = webDriver.find_element(By.XPATH, f"/html/body/div/div/div/div[1]/div[1]/div[1]/div[1]/span")
+        innerHTML = element.get_attribute("innerHTML")
+        formattedEventName = TimeConversion.DetermineCurrentEventSelected(configDictionary, innerHTML, logger)
+        if formattedEventName == False:
+            raise RuntimeError("Event not not found. Unable to format.")
+        eventTimeZone = TimeConversion.DetermineTimeZone(formattedEventName, logger)
+        if eventTimeZone == False:
+            raise RuntimeError("Time Zone not calculated.")
+        return eventTimeZone
             
     except Exception as e:
         logger.error(f"Unable to determine time of current event. {e}")
         return False
 
 
-
-
-def ClickSession(configDictionary, webDriver, logger):
+"""
+Clicks the event if the event start is within 1 hour of the current time
+"""
+def ClickSessionIfActive(configDictionary, webDriver, logger, eventTimeZone):
     try:
-        for i in range(int(configDictionary["numberOfEvents"])):
+        while 1 == 1:
+            i = i + 1
             aTagElement = i + 1
-            element = webDriver["webDriver"].find_element(By.XPATH, f"/html/body/div/div/div/div[2]/div/div[2]/div/a[{aTagElement}]/div[2]/div[2]/div")
+            element = webDriver.find_element(By.XPATH, f'//*[@id="body"]/div/div/div/div[1]/div[2]/div/div[{aTagElement}]/a/div[2]/span')
             innerHTML = element.get_attribute("innerHTML")
-            if configDictionary["currentMonth"] in innerHTML:
+            formattedEventTime = TimeConversion.FormatEventTime(innerHTML, logger)
+            if formattedEventTime == False:
+                raise ValueError("Event time not formatted.")
+            eventFound = TimeConversion.DetermineIfEventTimeNow(eventTimeZone, formattedEventTime, logger)
+            if eventFound == True:
                 element.click()
-                logger.info(f"Clicking Event number {i} of {configDictionary["numberOfEvents"]}")
-                return True
+                time.sleep(int(configDictionary["longDelay"]))
+                navigatedToLiveTiming = ValidateLiveTimingActive(webDriver, logger)
+                if navigatedToLiveTiming == True:
+                    return True
+                else:
+                    raise RuntimeError("Unable to navigate to the live timing site")
     except Exception as e:
-        logger.error(f"Unable to click the element. {e}")
+        logger.error(f"Unable to click the element and navigate to live timing. {e}")
+        return False
+    
+
+
+
+"""
+Validates if the live timing screen is currently displayed
+"""
+def ValidateLiveTimingActive(webDriver, logger):
+    try:
+        element = webDriver.find_element(By.XPATH, f'//*[@id="livePage"]/div[1]/div[2]/div[2]/div[1]/div/div/div[2]/div[1]/div/div[1]/div[1]')
+        innerHTML = element.get_attribute("innerHTML")
+        if innerHTML.lower() == "wind":
+            return True
+        
+    except Exception as e:
+        logger.error(f"Unable to validate traversal to live timing page. {e}")
         return False
