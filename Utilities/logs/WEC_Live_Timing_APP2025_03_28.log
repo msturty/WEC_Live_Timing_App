@@ -1,0 +1,171 @@
+2025-03-28 09:54:50,840 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 09:54:55,072 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:56:02,775 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 09:56:07,302 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:56:07,302 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:56:07,302 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 09:56:09,305 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:56:09,305 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:56:09,305 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 09:56:11,347 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:56:11,347 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:56:11,347 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 09:56:11,347 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 09:57:09,961 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 09:57:09,961 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 09:57:12,710 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:57:12,710 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:57:12,710 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 09:57:15,187 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:57:15,187 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:57:15,187 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 09:57:16,990 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 09:57:16,990 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 09:57:16,990 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 09:57:16,991 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 10:00:30,813 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:00:30,813 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:00:32,702 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | type object 'str' has no attribute 'configDictionary'
+2025-03-28 10:00:32,702 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:00:32,702 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 10:00:34,609 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | type object 'str' has no attribute 'configDictionary'
+2025-03-28 10:00:34,609 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:00:34,609 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 10:00:36,714 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | type object 'str' has no attribute 'configDictionary'
+2025-03-28 10:00:36,714 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:00:36,714 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 10:00:36,714 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 10:05:15,387 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:05:15,387 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:05:21,709 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 10:05:21,709 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:05:21,709 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 10:05:23,823 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 10:05:23,823 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:05:23,823 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 10:05:25,710 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | 'in <string>' requires string as left operand, not int
+2025-03-28 10:05:25,711 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:05:25,711 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 10:05:25,711 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 10:06:58,265 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:06:58,266 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:07:00,588 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | name 'e' is not defined
+2025-03-28 10:07:00,588 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:07:00,588 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 10:07:02,432 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | name 'e' is not defined
+2025-03-28 10:07:02,432 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:07:02,432 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 10:07:04,652 - StandardLogger - ERROR - <module> - Unable to open web browser or navigate to site | name 'e' is not defined
+2025-03-28 10:07:04,652 - StandardLogger - ERROR - CloseWebPage - Unable to close the webpage
+2025-03-28 10:07:04,652 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 10:07:04,652 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 10:07:41,222 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:07:41,222 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:07:43,318 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:07:43,318 - StandardLogger - ERROR - ClickEvent - Unable to click the element. 'str' object cannot be interpreted as an integer
+2025-03-28 10:07:43,318 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:07:43,318 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 10:07:45,423 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:07:45,423 - StandardLogger - ERROR - ClickEvent - Unable to click the element. 'str' object cannot be interpreted as an integer
+2025-03-28 10:07:45,423 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:07:45,424 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 10:07:47,388 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:07:47,388 - StandardLogger - ERROR - ClickEvent - Unable to click the element. 'str' object cannot be interpreted as an integer
+2025-03-28 10:07:47,388 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:07:47,388 - StandardLogger - INFO - <module> - Attempt number 4 to run WEC_Live_Timing_APP
+2025-03-28 10:07:47,389 - StandardLogger - CRITICAL - <module> - Attempted to run web scrapping 3 tiems and failed. Stopping WEC_Live_Timing_APP.
+2025-03-28 10:10:23,898 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:10:23,899 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:10:26,056 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:10:26,056 - StandardLogger - ERROR - ClickEvent - Unable to click the element. 'str' object cannot be interpreted as an integer
+2025-03-28 10:10:26,056 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:10:26,056 - StandardLogger - INFO - <module> - Attempt number 2 to run WEC_Live_Timing_APP
+2025-03-28 10:10:28,085 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:10:28,085 - StandardLogger - ERROR - ClickEvent - Unable to click the element. 'str' object cannot be interpreted as an integer
+2025-03-28 10:10:28,085 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:10:28,085 - StandardLogger - INFO - <module> - Attempt number 3 to run WEC_Live_Timing_APP
+2025-03-28 10:16:08,397 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:16:08,398 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:16:11,007 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:19:28,279 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:19:28,280 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:19:30,280 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:20:23,465 - StandardLogger - INFO - ClickEvent - Clicking Event number 4 of 8
+2025-03-28 10:20:32,191 - StandardLogger - INFO - <module> - Navigated to Live Timing
+2025-03-28 10:35:43,065 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:35:43,066 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:35:45,357 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:35:52,554 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:38:59,052 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:38:59,053 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:39:00,688 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:39:07,724 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:40:26,718 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:40:26,719 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:40:28,478 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:41:14,462 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:46:57,159 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:46:57,159 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:47:00,652 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:47:06,613 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:48:06,352 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:48:06,353 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:48:08,408 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:48:14,391 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:48:23,601 - StandardLogger - ERROR - NavigateToLiveTiming - Unable to click the element. Message: element not interactable
+  (Session info: chrome=134.0.6998.165)
+Stacktrace:
+#0 0x63329c026ffa <unknown>
+#1 0x63329bae57c3 <unknown>
+#2 0x63329bb3856e <unknown>
+#3 0x63329bb2b4cd <unknown>
+#4 0x63329bb5d292 <unknown>
+#5 0x63329bb2ae4a <unknown>
+#6 0x63329bb5d45e <unknown>
+#7 0x63329bb8370c <unknown>
+#8 0x63329bb5d063 <unknown>
+#9 0x63329bb29328 <unknown>
+#10 0x63329bb2a491 <unknown>
+#11 0x63329bfee42b <unknown>
+#12 0x63329bff22ec <unknown>
+#13 0x63329bfd5a22 <unknown>
+#14 0x63329bff2e64 <unknown>
+#15 0x63329bfb9bef <unknown>
+#16 0x63329c015558 <unknown>
+#17 0x63329c015736 <unknown>
+#18 0x63329c025e76 <unknown>
+#19 0x7e8fe6a9caa4 <unknown>
+#20 0x7e8fe6b29c3c <unknown>
+
+2025-03-28 10:48:37,475 - StandardLogger - ERROR - <module> - Unable to navigate to live timing.
+2025-03-28 10:51:26,831 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:51:26,832 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:51:30,753 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:51:35,205 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:52:11,307 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:52:11,308 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:52:13,238 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:52:17,958 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:53:26,045 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:53:26,045 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:53:27,759 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:53:31,820 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:55:12,562 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:55:12,563 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:55:15,495 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:55:21,811 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:55:48,511 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:55:48,511 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:55:50,259 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:56:00,175 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:56:27,505 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:56:27,506 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:56:29,254 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:56:33,861 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:58:00,271 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:58:00,271 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:58:01,989 - StandardLogger - INFO - <module> - Opened web browser and navigated to site
+2025-03-28 10:58:05,998 - StandardLogger - INFO - NavigateToLiveTiming - Clicking Event number 4 of 8
+2025-03-28 10:59:22,580 - StandardLogger - INFO - <module> - Initialized configDictionary
+2025-03-28 10:59:22,580 - StandardLogger - INFO - <module> - Attempt number 1 to run WEC_Live_Timing_APP
+2025-03-28 10:59:24,282 - StandardLogger - INFO - <module> - Opened web browser and navigated to site

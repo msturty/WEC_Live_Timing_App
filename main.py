@@ -1,0 +1,72 @@
+from Utilities import StandardConfig
+from Utilities import LoggingConfig
+from Utilities import StandardEmail
+from WebScrapers import WebInteractions
+
+
+def main():
+
+    #Initialize Config Dictionary and validate
+    try:
+        configDictionary = StandardConfig.CreateDictionary()
+        logger = LoggingConfig.LogToFile(configDictionary)
+        logger.info("Initialized configDictionary")
+
+
+    except Exception as e:
+        logger.error(f"Unable to initialize configDictionary | {e}")
+        configDictionary = {"emailFrom":"Matthew.J.Sturtevant@gmail.com", 
+                            "emailTo":"Matthew.J.Sturtevant@gmail.com", 
+                            "smtpServer":"smtp.gmail.com",
+                            "smtpPort" : 587,
+                            "emailPassword" : "gwqbnauoogqzwhnw", 
+                            "applicationName":"WEC_Live_Timing_APP"}
+        StandardEmail.SendGmail(message = f"Unable to initialize configDictionary | {e}",
+                                subject = "WEC Live Timing App - Critical",
+                                **configDictionary)
+        exit()
+
+    #Sets the outer loop for scrapping the WEC Live Timing page that handles opening the site and navigating to the appropriate live timing
+    continueLoop = True
+    loopCounter = 0
+    while continueLoop == True:
+        loopCounter += 1
+        logger.info(f"Attempt number {loopCounter} to run {configDictionary["applicationName"]}")
+        if loopCounter == 4:
+            logger.critical(f"Attempted to run web scrapping 3 tiems and failed. Stopping {configDictionary["applicationName"]}.")
+            StandardEmail.SendGmail(message = "Attempted to run web scrapping 3 times and failed. Stopping the process.",
+                                    subject = f"Fatal Error Running {configDictionary["applicationName"]}",
+                                    **configDictionary)
+            break
+        
+        #Opens the WEC live timing web page
+        try:
+            webDriver = WebInteractions.OpenWebPage(configDictionary, logger)
+            if configDictionary["currentYear"] in webDriver["windowTitle"]:
+                logger.info(f"Opened web browser and navigated to site")
+            else:
+                raise ValueError("The window title is not valid")
+        except Exception as e:
+            logger.error(f"Unable to open web browser or navigate to site | {e}")
+            closeBrowser = WebInteractions.CloseWebPage(configDictionary, webDriver, logger)
+            continue
+        
+        #Clicks the event in the current month on the WEC live timing page
+        try:
+            validateSuccess = WebInteractions.ClickEvent(configDictionary, webDriver, logger)
+            if validateSuccess == True:
+                logger.info(f"Navigated to Live Timing")
+            else:
+                logger.error(f"Unable to navigate to live timing.")
+
+        except Exception as e:
+            logger.error(f"Unable to click the event | {e}")
+            
+            
+            
+        try:
+            validateSuccess = WebInteractions.DetermineActiveSession(configDictionary, webDriver, logger)
+        except Exception as e:
+            logger.error(f"Unable to determine the applicable session by time. {e}")
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <openingURL>https://live.fiawec.com/en/live</openingURL>
+    <applicationName>WEC_Live_Timing_APP</applicationName>
+    <shortDelay>1</shortDelay>
+    <mediumDelay>3</mediumDelay>
+    <longDelay>5</longDelay>
+    <loopRetry>3</loopRetry>
+    <numberOfEvents>8</numberOfEvents>
+    <eventList>Qatar, Imola, Spa, Lone Star Le Mans, Le Mans, Sao Paulo, Fuji, Bahrain</eventList>
+    <emailFrom>Matthew.j.sturtevant@gmail.com</emailFrom>
+    <emailTo>Matthew.j.sturtevant@gmail.com</emailTo>
+    <smtpServer>smtp.gmail.com</smtpServer>
+    <smtpPort>587</smtpPort>
+    <emailPassword>gwqbnauoogqzwhnw</emailPassword>
+    <chromeWebDriver>/usr/local/bin/chromedriver-linux64/chromedriver</chromeWebDriver>
+    <chromeBrowser>/usr/bin/google-chrome</chromeBrowser>
+</config>
