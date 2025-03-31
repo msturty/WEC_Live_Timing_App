@@ -2,6 +2,7 @@ from Utilities import StandardConfig
 from Utilities import LoggingConfig
 from Utilities import StandardEmail
 from WebScrapers import WebInteractions
+import os
 
 
 def main():
@@ -15,12 +16,12 @@ def main():
 
     except Exception as e:
         logger.error(f"Unable to initialize configDictionary | {e}")
-        configDictionary = {"emailFrom":"Matthew.J.Sturtevant@gmail.com", 
-                            "emailTo":"Matthew.J.Sturtevant@gmail.com", 
-                            "smtpServer":"smtp.gmail.com",
-                            "smtpPort" : 587,
-                            "emailPassword" : "gwqbnauoogqzwhnw", 
-                            "applicationName":"WEC_Live_Timing_APP"}
+        configDictionary = {"smtpServer":"smtp.gmail.com",
+                            "smtpPort" : 587, 
+                            "applicationName":"WEC_Live_Timing_APP",
+                            "emailPassword":os.getenv("GMAIL_PASSWORD"),
+                            "emailFrom":os.getenv("EMAIL_FROM"),
+                            "emailTo":os.getenv("EMAIL_TO")}
         StandardEmail.SendGmail(message = f"Unable to initialize configDictionary | {e}",
                                 subject = "WEC Live Timing App - Critical",
                                 **configDictionary)
