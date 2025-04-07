@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+import re
 
 def DetermineCurrentEventSelected(configDictionary, currentEvent, logger):
     try:
         eventList = configDictionary["eventList"].split(',')
-        eventList = [eventList.lower() for event in eventList]
-        currentEvent = currentEvent.lower()
         for  event in eventList:
             if event in currentEvent:
                 logger.info(f"Located event {event}")
@@ -13,7 +12,7 @@ def DetermineCurrentEventSelected(configDictionary, currentEvent, logger):
         return False
     
     except Exception as e:
-        logger.error(f"unable to parse event. {e}")
+        logger.error(f"unable to parse event | {e}")
         return False
 
 def DetermineTimeZone(currentEvent, logger):
@@ -51,13 +50,14 @@ def DetermineTimeZone(currentEvent, logger):
                             
         return eventTimeZone
     except Exception as e:
-        logger.error(f"unable set timezone. {e}")
+        logger.error(f"unable set timezone | {e}")
         return False
     
     
 
 def FormatEventTime(eventTime, logger):
     try:
+        logger.info(f"Attempting to parse and format {eventTime}")
         #Sets the current year for date formatting
         currentYear = datetime.now().year
         
@@ -69,10 +69,12 @@ def FormatEventTime(eventTime, logger):
         
         #Removes the extra text and splites the date and time part of the string
         eventTime = eventTime.replace('th', '').replace('st', '').replace('nd', '').replace('rd', '')
-        date, time = eventTime.split(' / ')
+        date, time = eventTime.split('/')
         
         #Splits the month and day for the date variable
-        month, day = date.split(' ')
+        date = re.match(r"([A-Za-z]+)(\d+)", date)
+        if date:
+            month, day = date.groups()
         month = monthNames[month.lower()]
         day = int(day)
 
@@ -84,24 +86,35 @@ def FormatEventTime(eventTime, logger):
         return eventTime.strftime('%Y-%m-%d %H:%M:%S')
     
     except Exception as e:
-        logger.error(f"Unable to parse the eventTime to a datetime object {e}")
+        logger.error(f"Unable to parse the eventTime to a datetime object | {e}")
         return False
         
     
-def DetermineIfEventTimeNow(eventTimeZone, eventTime, logger):
+def DetermineIfEventTimeNow(configDictionary, eventTimeZone, eventTime, logger):
 
-    
-    eventTime = datetime.strptime(eventTime, '%Y-%m-%d %H:%M:%S')
-    localEventTime = eventTime.replace(tzinfo=eventTimeZone)
-    localTime = datetime.now().astimezone()  
-    minusOneHourLocalTime = localTime - timedelta(hours=1)
-        
-    # Check if the event has already passed by more than 1 hour in your local time zone
-    if minusOneHourLocalTime <= localEventTime <= localTime:
-        logger.info("Local time within 1 hour of the session start time.")
-        return True
-    elif localEventTime <= minusOneHourLocalTime:
-        logger.info("Local time more than 1 hour of the session start time.")
-        return False
-    else:
+    try:
+        logger.info(f"setting {eventTime} to a datetime object")
+        eventTime = datetime.strptime(eventTime, '%Y-%m-%d %H:%M:%S')
+        localEventTime = eventTime.replace(tzinfo=eventTimeZone)
+        if configDictionary["environment"] == "prod":
+            logger.info("getting the current time")
+            localTime = datetime.now().astimezone()
+        else:
+            logger.info("setting dev time to testing time from config")
+            localTime = datetime.strptime(configDictionary["testingDateTime"], '%Y-%m-%d %H:%M:%S')
+            
+        localTime = localTime.astimezone()
+        minusOneHourLocalTime = localTime - timedelta(hours=1)
+            
+        # Check if the event has already passed by more than 1 hour in your local time zone
+        if minusOneHourLocalTime <= localEventTime <= localTime:
+            logger.info("Local time within 1 hour of the session start time.")
+            return True
+        elif localEventTime <= minusOneHourLocalTime:
+            logger.info("Local time more than 1 hour of the session start time.")
+            return False
+        else:
+            return False
+    except Exception as e:
+        logger.error(f"Unable to determine if event time is in the current time window | {e}")
         return False

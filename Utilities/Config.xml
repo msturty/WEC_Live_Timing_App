@@ -5,11 +5,14 @@
     <shortDelay>1</shortDelay>
     <mediumDelay>3</mediumDelay>
     <longDelay>5</longDelay>
+    <extraLongDelay>60</extraLongDelay>
     <loopRetry>3</loopRetry>
     <numberOfEvents>8</numberOfEvents>
-    <eventList>Qatar, Imola, Spa, Lone Star Le Mans, Le Mans, Sao Paulo, Fuji, Bahrain</eventList>
+    <eventList>qatar, imola, spa, lone star le mans, le mans, sao paulo, fuji, bahrain</eventList>
     <smtpServer>smtp.gmail.com</smtpServer>
     <smtpPort>587</smtpPort>
     <chromeWebDriver>/usr/local/bin/chromedriver-linux64/chromedriver</chromeWebDriver>
     <chromeBrowser>/usr/bin/google-chrome</chromeBrowser>
+    <environment>dev</environment>
+    <testingDateTime>2025-02-28 07:00:00</testingDateTime>
 </config>

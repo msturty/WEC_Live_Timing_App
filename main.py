@@ -27,7 +27,7 @@ def main():
                                 **configDictionary)
         exit()
 
-    #Sets the outer loop for scrapping the WEC Live Timing page that handles opening the site and navigating to the appropriate live timing
+    #Sets the outer loop for scrapping the WEC Live Timing page that handles opening the site and navigating to the appropriate live timing event
     continueLoop = True
     loopCounter = 0
     while continueLoop == True:
@@ -49,12 +49,12 @@ def main():
                 raise ValueError("The window title is not valid")
         except Exception as e:
             logger.error(f"Unable to open web browser or navigate to site | {e}")
-            closeBrowser = WebInteractions.CloseWebPage(configDictionary, webDriver, logger)
+            closeBrowser = WebInteractions.CloseWebPage(configDictionary, webDriver["webDriver"], logger)
             continue
         
         #Clicks the event in the current month on the WEC live timing page
         try:
-            validateSuccess = WebInteractions.ClickEvent(configDictionary, webDriver, logger)
+            validateSuccess = WebInteractions.ClickEvent(configDictionary, webDriver["webDriver"], logger)
             if validateSuccess == True:
                 logger.info(f"Navigated to Live Timing")
             else:
@@ -68,7 +68,7 @@ def main():
         
         #Determines the timezone of the current event    
         try:
-            eventTimeZone = validateSuccess = WebInteractions.DetermineSelectedEventTZ(configDictionary, webDriver, logger)
+            eventTimeZone = validateSuccess = WebInteractions.DetermineSelectedEventTZ(configDictionary, webDriver["webDriver"], logger)
             if eventTimeZone == False:
                 logger.error("Unable to determine event timezone")
                 continue
@@ -76,12 +76,12 @@ def main():
                 logger.info(f"Time zone located as {eventTimeZone}")
             
         except Exception as e:
-            logger.error(f"Unable to determine the applicable session by time. {e}")
+            logger.error(f"Unable to determine the applicable session by time | {e}")
             continue
 
-        #Clicks session if session time has started with the last hour
+        #Clicks session if session time has started within the last hour
         try:
-            validateSuccess = WebInteractions.ClickSessionIfActive(configDictionary, webDriver, logger, eventTimeZone)
+            validateSuccess = WebInteractions.ClickSessionIfActive(configDictionary, webDriver["webDriver"], logger, eventTimeZone)
             if validateSuccess == False:
                 logger.error("Unable to find an active session")
                 continue
@@ -89,11 +89,37 @@ def main():
                 logger.info(f"Active session found")
             
         except Exception as e:
-            logger.error(f"Unable to determine the applicable session by time. {e}")
+            logger.error(f"Unable to determine the applicable session by time | {e}")
             continue
-
-
-
-
+        
+        #Validates the navigation to the live timing site by checking for the text "WIND"
+        try:
+            validateSuccess = WebInteractions.ValidateLiveTimingActive(configDictionary, webDriver["webDriver"], logger)
+            if validateSuccess == False:
+                logger.error("Unable to validate active live timing session")
+                continue
+            else:
+                logger.info("Navigated to a live session")
+        except Exception as e:
+            logger.error(f"Unable to validate navigation to live timing | {e}")
+            continue
+        
+        #Scrapes the live timing table
+        try:
+            validateSuccess = WebInteractions.ExtractLiveTimingTable(configDictionary, webDriver["webDriver"], logger)
+            if validateSuccess == False:
+                logger.error("Unable to extract live timing data from site")
+                continue
+            else: 
+                logger.info("Navigated to a live session")
+        
+        except Exception as e:
+            logger.error(f"Unable to extract live timing data from site | {e}")
+            continue
+        
+        #Compares the last scrape to the current scrape and outputs only the data that has changed
+        
+        
+        #Inserts the new data into the db
 if __name__ == "__main__":
     main()

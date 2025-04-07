@@ -23,9 +23,17 @@ def CreateDictionary():
         
         # Add the current year and month to the configDictionary
         currentYear = str(datetime.datetime.now().year)
-        currentMonth = str(datetime.datetime.now().month - 1)
+        currentMonth = str(datetime.datetime.now().month - 2)
         configDictionary['currentYear'] = currentYear
         configDictionary['currentMonth'] = currentMonth
+        
+        
+        monthNames = {
+        '1': "january", '2': 'february', '3': 'march', '4': 'april', '5': 'may', '6': 'june',
+        '7': 'july', '8': 'august', '9': 'september', '10': 'october', '11': 'november', '12': 'december'
+        }
+        
+        configDictionary['currentMonthName'] = monthNames[configDictionary['currentMonth']]
         
         # Get values from the locker
         configDictionary = GetSecretKeys(configDictionary)
