@@ -63,7 +63,7 @@ def ClickEvent(configDictionary, webDriver, logger):
             aTagElement = i + 1
             element = webDriver.find_element(By.XPATH, f'//*[@id="body"]/div/div/div/div[2]/div/div[2]/div/a[{aTagElement}]/div[2]/div[2]')
             innerHTML = element.get_attribute("innerHTML").lower()
-            logger.info(f"Checking innger HTML value {innerHTML} for a match with {configDictionary["currentMonthName"]} on event number {aTagElement}")
+            logger.info(f"Checking innger HTML value {innerHTML} for a match with {configDictionary["currentMonthName"]} on event number {i}")
             if configDictionary["currentMonthName"] in innerHTML:
                 element.click()
                 logger.info(f"Clicking Event number {i} of {configDictionary["numberOfEvents"]}")
@@ -126,8 +126,8 @@ def ClickSessionIfActive(configDictionary, webDriver, logger, eventTimeZone):
             if eventFound == True:
                 element.click()
                 time.sleep(int(configDictionary["longDelay"]))
-                navigatedToLiveTiming = ValidateLiveTimingActive(webDriver, logger)
-                if navigatedToLiveTiming == True:
+                navigatedToLiveTiming = ValidateLiveTimingActive(configDictionary, webDriver, logger)
+                if navigatedToLiveTiming == True:   
                     return True
                 else:
                     raise RuntimeError("Unable to navigate to the live timing site")
@@ -145,6 +145,7 @@ def ValidateLiveTimingActive(configDictionary, webDriver, logger):
         time.sleep(int(configDictionary["longDelay"]))
         WebDriverWait(webDriver, 10).until(
             lambda webDriver: webDriver.execute_script("return document.readyState") == "complete")
+        
         element = webDriver.find_element(By.XPATH, f'//*[@id="livePage"]/div[1]/div[2]/div[2]/div[1]/div/div/div[2]/div[1]/div/div[1]/div[1]')
         innerHTML = element.get_attribute("innerHTML")
         if innerHTML.lower() == "wind":
@@ -167,7 +168,7 @@ def ExtractLiveTimingTable(configDictionary, webDriver, logger):
         innerHTML = element.get_attribute('innerHTML')
         
         table = BeautifulSoup(innerHTML, 'lxml')
-        table = table.find('table')
+        #table = table.find('table')
         
         headers = [th.get_text(strip=True) for th in table.select('thead th')]
         
@@ -176,8 +177,27 @@ def ExtractLiveTimingTable(configDictionary, webDriver, logger):
             cells = [td.get_text(strip=True) for td in row.select('td')]
             if cells:
                 row_dict = dict(zip(headers, cells))
-                #data.append(row_dict) 
-        
+                data.append(row_dict) 
+
     except Exception as e:
         logger.error(f"Error Extracting Live Timing Table | {e}")
+        return False
+    
+def ExtractSessionParamaters(configDictionary, webDriver, logger):
+    try:
+        sessionParamaters = {}
+        range = 5
+        for i in range:
+            element = webDriver.find_element(By.XPATH, f'/html/body/div/div[1]/div[2]/div[2]/div[1]/div/div/div[2]/div[1]/div/div[{i}]/div[1]')
+            key = element.get_attribute('innerHTML')
+            element = webDriver.find_element(By.XPATH, f'/html/body/div/div[1]/div[2]/div[2]/div[1]/div/div/div[2]/div[1]/div/div[{i}]/div[2]')
+            value = element.get_attribute('innerHTML')
+            
+            sessionParamaters[key] = value
+
+        return sessionParamaters
+            
+            
+    except Exception as e:
+        logger.error(f"Error Extracting Session Paramaters")
         return False

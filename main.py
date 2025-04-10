@@ -1,8 +1,11 @@
 from Utilities import StandardConfig
 from Utilities import LoggingConfig
 from Utilities import StandardEmail
+from Utilities import DataProcessing
 from WebScrapers import WebInteractions
 import os
+import time
+import copy
 
 
 def main():
@@ -49,7 +52,7 @@ def main():
                 raise ValueError("The window title is not valid")
         except Exception as e:
             logger.error(f"Unable to open web browser or navigate to site | {e}")
-            closeBrowser = WebInteractions.CloseWebPage(configDictionary, webDriver["webDriver"], logger)
+            WebInteractions.CloseWebPage(configDictionary, webDriver["webDriver"], logger)
             continue
         
         #Clicks the event in the current month on the WEC live timing page
@@ -79,7 +82,7 @@ def main():
             logger.error(f"Unable to determine the applicable session by time | {e}")
             continue
 
-        #Clicks session if session time has started within the last hour
+        #Clicks session if session time has started within the last hour and validates to traversal to live timing
         try:
             validateSuccess = WebInteractions.ClickSessionIfActive(configDictionary, webDriver["webDriver"], logger, eventTimeZone)
             if validateSuccess == False:
@@ -91,35 +94,72 @@ def main():
         except Exception as e:
             logger.error(f"Unable to determine the applicable session by time | {e}")
             continue
+    
+    errorCount = 0
+    countAfterFinish = 0
+    
+    try:
+        if  currentLiveTiming is not None:
+            logger.info("currentLiveTiming variable is initialized")
+    except NameError as ne:
+        logger.warning("Creating dictionary currentLiveTiming as it is not initialized")
+        currentLiveTiming = {}
         
-        #Validates the navigation to the live timing site by checking for the text "WIND"
+    while True:
         try:
-            validateSuccess = WebInteractions.ValidateLiveTimingActive(configDictionary, webDriver["webDriver"], logger)
-            if validateSuccess == False:
-                logger.error("Unable to validate active live timing session")
-                continue
-            else:
-                logger.info("Navigated to a live session")
-        except Exception as e:
-            logger.error(f"Unable to validate navigation to live timing | {e}")
-            continue
-        
-        #Scrapes the live timing table
-        try:
-            validateSuccess = WebInteractions.ExtractLiveTimingTable(configDictionary, webDriver["webDriver"], logger)
-            if validateSuccess == False:
+            if errorCount == 2:
+                logger.error("Error extracting session data")
+                WebInteractions.CloseWebPage(configDictionary, webDriver["webDriver"], logger)
+                break
+            if sessionParamaters["sessionStatus"] == "finish":
+                countAfterFinish = countAfterFinish + 1
+                if countAfterFinish == 6:
+                    continueLoop = False
+                    break
+            
+            lastLiveTiming = copy.deepcopy(currentLiveTiming)
+            
+            currentLiveTiming = WebInteractions.ExtractLiveTimingTable(configDictionary, webDriver["webDriver"], logger)
+            if currentLiveTiming == False:
                 logger.error("Unable to extract live timing data from site")
+                errorCount = errorCount + 1
                 continue
             else: 
-                logger.info("Navigated to a live session")
+                logger.info("Extracted live timing table")
+                
         
+            sessionParamaters = WebInteractions.ExtractSessionParamaters(configDictionary, webDriver["webDriver"], logger)
+            if sessionParamaters == False:
+                logger.error("Unable to capture session paramaters")
+                errorCount = errorCount + 1
+                continue
+            else: 
+                logger.info("Extracted session paramaters")
+            
+            
+            newLiveTiming = DataProcessing.CreateAndCompareDictionary(currentLiveTiming, lastLiveTiming, logger)
+            if newLiveTiming == False:
+                logger.error("Unable to parse live timing")
+                errorCount = errorCount + 1
+                continue
+            else: 
+                logger.info("Extracted session paramaters")
+            
+            
+            
+            
+            errorCount = 0
         except Exception as e:
-            logger.error(f"Unable to extract live timing data from site | {e}")
+            logger.error(f"Unable to capture session paramaters| {e}")
             continue
         
         #Compares the last scrape to the current scrape and outputs only the data that has changed
         
         
         #Inserts the new data into the db
+        
+        
+        
+        time.sleep(int(configDictionary["extraLongDelay"]))
 if __name__ == "__main__":
     main()
